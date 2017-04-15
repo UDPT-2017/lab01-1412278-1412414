@@ -1,0 +1,49 @@
+h1, h2, h3 {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+footer {
+  background-color: rgb(54, 48, 52);
+  color: white;
+  padding: 25px;
+  margin-top: 25px;
+}
+
+.sidebar {
+  background-color: rgb(255, 250, 249);
+  height: 100%;
+}
+
+.sidebar a {
+  color:black;
+}
+
+.sidebar a:hover {
+  background-color: rgb(182, 189, 181);
+}
+
+.mynavbar {
+  background-color: rgb(54, 48, 52);
+}
+
+.mynavbar div ul li a {
+  color: white;
+}
+
+.mynavbar div ul li a:hover {
+  color: white;
+  background-color: green;
+}
+
+.mymenuicon {
+    width: 35px;
+    height: 5px;
+    background-color: white;
+    margin: 6px 0;
+}
+
+a.active {
+  background-color: rgb(147, 148, 111);
+  color:black;
+}
