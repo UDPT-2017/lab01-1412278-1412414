@@ -21,12 +21,12 @@
                 <li><a class="{{activenavbar3}}" href="/Blog">Blog</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><button class="buttondn" data-toggle="collapse" data-target="#formdk" aria-expanded="false"><a class="linkdangky" href="/DangKy"><span class="glyphicon glyphicon-user"></span> Đăng ký</a></button></li>
-                {{#if res.session.username}}
-                    <li>
-                        Chào mừng {{res.session.username}}
-                    </li>
+                {{#if username}}
+
+                    <li><button class="buttondn"><a class="linkdangky" href="/DangXuat"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></button></li>
+                    <li><button class="buttondn">Chào mừng {{username}}</button></li>
                 {{else}}
+                    <li><button class="buttondn" data-toggle="collapse" data-target="#formdk" aria-expanded="false"><a class="linkdangky" href="/DangKy"><span class="glyphicon glyphicon-user"></span> Đăng ký</a></button></li>
                     <li><button class="buttondn" data-toggle="collapse" data-target="#formdn" aria-expanded="false"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</button></li>
                 {{/if}}
             </ul>
