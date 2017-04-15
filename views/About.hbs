@@ -1,0 +1,26 @@
+<div class="col-md-5">
+
+    <hr/>
+    <h1>  Tên nhóm : 1412414_1412278 </h1>
+    Thành viên 1 : Vương Thiên Phú- MSSV: 1412414.<br>
+    <img src="../Images/ThienPhu.jpg" alt="1412414" style="width:128px;height:128px;"><br>
+    Thành viên 2 : Phan Khánh Lâm - MSSV : 1412278.<br>
+    <img src="../Images/KhanhLam.jpg" alt="1412278" style="width:128px;height:128px;"><br>
+
+</div>
+<div class="col-md-5">
+    <h1>Liên hệ</h1>
+    <div id="map" style="width:450px;height:600px;background:white"></div>
+    <script>
+        function toaDo() {
+            var mapOptions = {
+                center: new google.maps.LatLng(10.762638, 106.682586),
+                zoom: 20,
+                mapTypeId: google.maps.MapTypeId.TERRAIN
+            }
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLasyE6YYV5N3bTnLH8gbJ0nIOi_UFzzE&callback=toaDo"></script>
+</div>

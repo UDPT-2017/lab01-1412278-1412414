@@ -62,6 +62,44 @@ app.get('/Album', function(req, res) {
     }
 });
 
+app.get('/Album/List1', function(req, res) {
+    if (req.session.username) {
+        res.render('List1', {
+            layout: 'baitap1',
+            cssfile: 'Album',
+            activenavbar1: 'active',
+            activeleftmenu1: 'active',
+            username: req.session.username
+        });
+    } else {
+        res.render('List1', {
+            layout: 'baitap1',
+            cssfile: 'Album',
+            activenavbar1: 'active',
+            activeleftmenu1: 'active'
+        });
+    }
+});
+
+app.get('/Album/List2', function(req, res) {
+    if (req.session.username) {
+        res.render('List2', {
+            layout: 'baitap1',
+            cssfile: 'Album',
+            activenavbar1: 'active',
+            activeleftmenu1: 'active',
+            username: req.session.username
+        });
+    } else {
+        res.render('List2', {
+            layout: 'baitap1',
+            cssfile: 'Album',
+            activenavbar1: 'active',
+            activeleftmenu1: 'active'
+        });
+    }
+});
+
 app.get('/About', function(req, res) {
     if (req.session.username) {
         res.render('About', {
@@ -92,6 +130,44 @@ app.get('/Blog', function(req, res) {
         });
     } else {
         res.render('Blog', {
+            layout: 'baitap1',
+            cssfile: 'Blog',
+            activenavbar3: 'active',
+            activeleftmenu3: 'active'
+        });
+    }
+});
+
+app.get('/Blog/Topic1', function(req, res) {
+    if (req.session.username) {
+        res.render('Topic1', {
+            layout: 'baitap1',
+            cssfile: 'Blog',
+            activenavbar3: 'active',
+            activeleftmenu3: 'active',
+            username: req.session.username
+        });
+    } else {
+        res.render('Topic1', {
+            layout: 'baitap1',
+            cssfile: 'Blog',
+            activenavbar3: 'active',
+            activeleftmenu3: 'active'
+        });
+    }
+});
+
+app.get('/Blog/Topic2', function(req, res) {
+    if (req.session.username) {
+        res.render('Topic2', {
+            layout: 'baitap1',
+            cssfile: 'Blog',
+            activenavbar3: 'active',
+            activeleftmenu3: 'active',
+            username: req.session.username
+        });
+    } else {
+        res.render('Topic2', {
             layout: 'baitap1',
             cssfile: 'Blog',
             activenavbar3: 'active',
@@ -153,7 +229,13 @@ app.post('/DangNhap', function(req, res) {
             req.session.username = req.body.user.tendangnhap;
             res.redirect('/');
         } else {
-
+            res.render('Home', {
+                layout: 'baitap1',
+                cssfile: 'Home',
+                activenavbar0: 'active',
+                activeleftmenu0: 'active',
+                loiDangNhap: 'Tên đăng nhập hoặc mật khẩu sai'
+            })
         }
     });
 });
