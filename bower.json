@@ -1,0 +1,21 @@
+{
+  "name": "lab01-1412278-1412414",
+  "main": "index.js",
+  "homepage": "https://github.com/UDPT-2017/lab01-1412278-1412414",
+  "authors": [
+    "thienphu"
+  ],
+  "description": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery-validation": "^1.16.0"
+  }
+}

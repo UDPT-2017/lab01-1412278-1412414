@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{> khaibaocanban0}}
+    <link rel="stylesheet" type="text/css" href="../css/DangKy.css" />
+    <script src="/components/jquery-validation/dist/jquery.validate.js"></script>
+    <script>
+        $("#formdangky").validate({
+            rules: {
+                user: {
+                    required: true,
+                    minlength: 10
+                },
+                name: {
+                    required: true,
+                    minlength: 10
+                },
+                male: "required",
+                female: "required",
+                dateofbirth: "required",
+                pwd: {
+                    required: true,
+                    minlength: 10
+                }
+            },
+            messages: {
+                user: {
+                    required: "Xin nhập thông tin",
+                    minlength: "Tên đăng nhập phải dài ít nhất 10 ký tự"
+                },
+                name: {
+                    required: "Xin nhập thông tin",
+                    minlength: "Họ tên phải dài ít nhất 10 ký tự"
+                },
+                male: "Xin chọn giới tính",
+                female: "Xin chọn giới tính",
+                dateofbirth: "Xin nhập ngày sinh",
+                pwd: {
+                    required: "Xin nhập thông tin",
+                    minlength: "Mật khảu phải dài ít nhất 10 ký tự"
+                }
+            }
+
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    </script>
+    <style>
+        form .error {
+            color: #ff0000;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Đăng Ký</h1>
+        <div class="row">
+            <div class="col-md-12 ">
+                <form method="post" action="/DangKy" id="formdangky">
+                    <div class="form-group">
+                        <label for="user">Tên đăng nhập *:</label>
+                        <input type="text" class="form-control" id="user" placeholder="Xin nhập tên đăng nhập" name="user[tenDangNhap]" requied>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Mật khẩu *:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Xin nhập mật khẩu" name="user[matKhau]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Họ Tên *:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Xin nhập họ và tên" name="user[hoTen]" required>
+                    </div>
+                    <label for="male">Nam</label>
+                    <input type="radio" id="male" value="Nam" name="user[gioiTinh]" required>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <label for="female">Nữ</label>
+                    <input type="radio" id="female" value="Nu" name="user[gioiTinh]" required>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="dateofbirth">Ngày tháng năm sinh *:</label>
+                        <input type="date" class="form-control" id="dateofbirth" name="user[ngaySinh]" required min="01-01-1880">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Xin nhập Email" name="user[email]" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+        <div class="row ketqua">
+            <div class="col-md-12 ">
+                {{#if errorMessage}}
+                    <div class="alert alert-danger">
+                        {{errorMessage}}
+                    </div>
+                {{else}}
+                    {{#if detailMessage}}
+                        <div class="alert alert-success">
+                            {{detailMessage}}
+                        </div>
+                    {{/if}}
+                {{/if}}
+            </div>
+        </div>
+        <footer>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>1412278 - Phan Khánh Lâm và 1412414 - Vương Thiên Phú</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

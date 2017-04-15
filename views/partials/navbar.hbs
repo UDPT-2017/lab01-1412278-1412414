@@ -1,0 +1,36 @@
+<nav class="navbar mynavbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#1" aria-expanded="false">
+              <div class="mymenuicon"></div>
+              <div class="mymenuicon"></div>
+              <div class="mymenuicon"></div>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img alt="Brand" src="../Images/hello-speech-bubble-handmade-chatting-symbol.png" style="height:30px; width: 45px;">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#2" aria-expanded="false">
+            <i class="fa fa-close" style="font-size:35px;color:red;"></i>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="1">
+            <ul class="nav navbar-nav">
+                <li><a class="{{activenavbar0}}" href="/">Home</a></li>
+                <li><a class="{{activenavbar1}}" href="/Album">Album</a></li>
+                <li><a class="{{activenavbar2}}" href="/About">About</a></li>
+                <li><a class="{{activenavbar3}}" href="/Blog">Blog</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {{#if username}}
+
+                    <li><button class="buttondn"><a class="linkdangky" href="/DangXuat"><span class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></button></li>
+                    <li><button class="buttondn">Chào mừng {{username}}</button></li>
+                {{else}}
+                    <li><button class="buttondn" data-toggle="collapse" data-target="#formdk" aria-expanded="false"><a class="linkdangky" href="/DangKy"><span class="glyphicon glyphicon-user"></span> Đăng ký</a></button></li>
+                    <li><button class="buttondn" data-toggle="collapse" data-target="#formdn" aria-expanded="false"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</button></li>
+                {{/if}}
+            </ul>
+        </div>
+
+    </div>
+</nav>
