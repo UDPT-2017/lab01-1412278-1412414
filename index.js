@@ -1,9 +1,13 @@
 var express = require('express');
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
-
+var pg = require('pg');
+var session = require('express-session');
+const pool = require('./lib/db');
+var session = require('express-session');
 var app = express();
 
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 app.use(express.static('public'));
 app.use('/components', express.static('bower_components'));
 app.use(bodyParser.urlencoded({
@@ -18,6 +22,7 @@ app.set('view engine', '.hbs');
 
 //routes
 app.get('/', function(req, res) {
+    
     res.render('Home', {
         layout: 'baitap1',
         cssfile: 'Home',
@@ -57,44 +62,50 @@ app.get('/DangKy', function(req, res) {
     res.render('DangKy');
 });
 
-var client = new pg.Client();
-client.connect(function(err) {
-    if (err) throw err;
-
-
-    client.end(function(err) {
-        if (err) throw error;
-    })
-})
-
-var session = require('express-session');
-app.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
-var conString = "postgres://AdminMyBlog:123456@localhost:5432/myBlogAdmin";
-
-app.get('/register',function(req,res){
-  if(req.session.exists){
-    res.render('signup',{title: 'MyBlog.me sign-up',message: 'Sign Up',exists: 'Sorry, that username already exists.'});
-  }
-  else
-    res.render('signup',{title: 'MyBlog.me sign-up',message: 'Sign Up'});
-});
-
-app.post('/sign-up',function(req,res) {
-    var client = new pg.Client(conString);
-    client.connect();
-    var query = client.query("INSERT INTO users(username, password) SELECT $1::VARCHAR, $2 WHERE NOT EXISTS (SELECT username FROM users WHERE username = $1);",
-                [req.body.user, req.body.pass],function(err, result) {
-                  if(result.rowCount === 0){
-                    req.session.exists = true;
-                    res.redirect('/register');
-                  }
-                   else{
-                      res.redirect('/');
-                   }
-                   client.end();
+app.get('/DangKyThatBai', function(req, res) {
+    if (req.session.exists) {
+        res.render('DangKy', {
+            errorMessage: 'Đã có người dùng này'
         });
+    }
 });
 
+app.post('/DangKy', function(req, res) {
+    pool.query("select idnguoidung from nguoidung where tendangnhap = $1", [req.body.user.tenDangNhap], function(err, result) {
+        if (err) {
+            return console.error('error running query', err);
+        }
+        console.log(result);
+        if (result.rowCount == 1) {
+
+            req.session.exists = true;
+            res.redirect('/DangKyThatBai');
+        } else {
+            pool.query("INSERT INTO nguoidung (tennguoidung, gioitinh, ngaysinh, matkhau, tendangnhap, email) VALUES ($1,$2, $3, $4, $5, $6)", [req.body.user.hoTen, req.body.user.gioiTinh, req.body.user.ngaySinh, req.body.user.matKhau, req.body.user.tenDangNhap, req.body.user.email], function(err, result2) {
+                res.render('DangKy', {
+                    detailMessage: 'Đăng ký thành công'
+                });
+            });
+        }
+    });
+});
+
+app.post('/DangNhap', function(req, res) {
+  pool.query("select tennguoidung from nguoidung where tendangnhap = $1 and matkhau = $2", [req.body.user.tendangnhap, req.body.user.matkhau], function(err, result) {
+      if (err) {
+          return console.error('error running query', err);
+      }
+
+      if (result.rowCount == 1)
+      {
+        req.session.username = req.body.user.tendangnhap;
+        res.redirect('/');
+      }
+      else {
+
+      }
+  });
+});
 
 var port = 3000;
 //start server
