@@ -1,0 +1,30 @@
+{
+  "name": "bt1",
+  "version": "0.0.0",
+  "description": "bai tap 1",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UDPT-2017/lab01-1412278-1412414.git"
+  },
+  "author": "thienphu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UDPT-2017/lab01-1412278-1412414/issues"
+  },
+  "homepage": "https://github.com/UDPT-2017/lab01-1412278-1412414#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.6",
+    "pug": "^2.0.0-beta11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
