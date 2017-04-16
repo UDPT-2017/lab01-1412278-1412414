@@ -6,6 +6,7 @@ var session = require('express-session');
 const pool = require('./lib/db');
 var session = require('express-session');
 var app = express();
+var nodemailer = require('nodemailer');
 
 app.use(session({
     secret: 'keyboard cat',
@@ -220,13 +221,42 @@ app.post('/DangKy', function(req, res) {
 });
 
 app.post('/DangNhap', function(req, res) {
-    pool.query("select tennguoidung from nguoidung where tendangnhap = $1 and matkhau = $2", [req.body.user.tendangnhap, req.body.user.matkhau], function(err, result) {
+    pool.query("select tennguoidung, email from nguoidung where tendangnhap = $1 and matkhau = $2", [req.body.user.tendangnhap, req.body.user.matkhau], function(err, result) {
         if (err) {
             return console.error('error running query', err);
         }
 
         if (result.rowCount == 1) {
             req.session.username = req.body.user.tendangnhap;
+
+            var transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: 'thienphuvuong2@gmail.com',
+                    pass: 'W0n9T10nFu'
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            });
+
+
+            let mailOptions = {
+                from: '"1412414-1412278" <thienphuvuong2@gmail.com>', // sender address
+                to: result.rows[0].email, // list of receivers
+                subject: 'Hello', // Subject line
+                text: 'Hello', // plain text body
+                html: '<b>Hello</b>' // html body
+            };
+
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log('error: ' + error);
+                }
+                console.log('Message %s sent: %s', info.messageId, info.response);
+            });
+
             res.redirect('/');
         } else {
             res.render('Home', {
