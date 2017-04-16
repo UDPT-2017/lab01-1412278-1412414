@@ -7,7 +7,7 @@ const pool = require('./lib/db');
 var session = require('express-session');
 var app = express();
 var nodemailer = require('nodemailer');
-
+var brcypt = require("brcypt");
 app.use(session({
     secret: 'keyboard cat',
 }));
@@ -179,6 +179,7 @@ app.get('/Blog/Topic2', function(req, res) {
 
 app.get('/DangKy', function(req, res) {
     res.render('DangKy');
+
 });
 
 app.get('/DangKyThatBai', function(req, res) {
@@ -198,6 +199,7 @@ app.post('/DangKy', function(req, res) {
         if (req.body.user.matKhau.length < 10) {
             res.render('DangKy', {
                 errorMessage: 'Mật khẩu không được ít hơn 10 ký tự'
+
             });
         } else {
             pool.query("select idnguoidung from nguoidung where tendangnhap = $1", [req.body.user.tenDangNhap], function(err, result) {
